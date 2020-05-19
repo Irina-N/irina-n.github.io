@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf=8">
+	<title>Mano puslapis</title>
+	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript">
+		
+		var answer = parseInt(Math.random() * 100);
+		//var tryCount = 0;
+		//var maxTryCount = 7;
+		var user = "первый игрок";
+
+		function readInt(){
+			var number = document.getElementById("userAnswer").value;
+			return parseInt(number);
+			// return +document.getElementById("userAnswer").value;
+		}
+
+		function write(text) {
+			document.getElementById("info").innerHTML = text;
+		}
+
+		function hide(id){
+			document.getElementById(id).style.display = "none";
+		}
+
+		function userTurn (){
+			if (user == "первый игрок") {
+				user = "второй игрок";
+			} else {
+				user = "первый игрок";
+			} return user;
+		}
+
+		function guess(){
+			//tryCount++;
+
+			var userAnswer = readInt();
+			if(userAnswer == answer){
+				write("<b>Поздравляю, " + user + ", вы угадали!</b>");
+				hide("button");
+				hide("userAnswer");
+			/*} else if(tryCount >= maxTryCount){
+				write("Вы проиграли<br>Правильный ответ: " + answer);
+				hide("button");
+				hide("userAnswer"); */
+			} else if(userAnswer > answer){
+				userTurn ();
+				write("Вы ввели слишком большое число.<br>Ходит <b>" + user + "</b>");
+			} else if(userAnswer < answer){
+				userTurn ();
+				write("Вы ввели слишком маленькое число.<br>Ходит <b>" + user + "</b>");			
+			}
+		}
+
+	</script>
+
+
+</head>
+<body>
+
+<div class="content">
+	<div class="header">
+		<a href="index.php">Главная</a>
+		<a href="riddles.php">Загадки</a>
+		<a href="guessTheNumber.html">Угадай число</a>
+		
+	</div>	
+	
+	<div class="contentWrap">
+		<div class="content">
+			<div class="center">
+				
+				<h1>Угадай число</h1>
+
+				<div class="box">
+					<p id="info">Эта игра для двоих. <br>Угадайте число от 0 до 100. <br> <b>Первый игрок</b>, ваша очередь.</p>
+					<input type="text" id="userAnswer">
+					<br>
+					<a href="#" onClick="guess();" id="button">Ответить</a>
+
+										
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+</div>
+<div class="footer">
+	Copyright &copy; <?php echo date"Y";> I.N.
+</div>
+
+</body>
+</html>
